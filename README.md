@@ -1,2 +1,2 @@
 # Ultimate-browser-hacks
-all the browser hack i can find
+all the browser hacks i can find
