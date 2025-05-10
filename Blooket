@@ -5,7 +5,7 @@
 // @description  Adds tokens and XP to your Blooket account (up to 1,000,000 tokens daily)
 // @author       Your Name
 // @license      MIT
-// @match        https://www.blooket.com/*
+// @match        https://dashboard.blooket.com/market*
 // @grant        none
 // @downloadURL https://github.com/QdPieDrury/Ultimate-browser-hacks/new/main
 // @updateURL https://github.com/QdPieDrury/Ultimate-browser-hacks/new/main
