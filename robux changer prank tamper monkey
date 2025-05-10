@@ -1,0 +1,39 @@
+// ==UserScript==
+// @name         Robux Changer 2.0 (with Stop)
+// @namespace    http://tampermonkey.net/
+// @version      1.4
+// @description  Allows you to set a custom Robux amount that appears on your screen when logged into roblox.com. Enter "stop" to halt.
+// @author       TayTakeOff (Modified by Your Name)
+// @match        https://www.roblox.com/*
+// @grant        none
+// @downloadURL  https://update.greasyfork.org/scripts/373832/Robux%20Changer%2020.user.js
+// @updateURL    https://update.greasyfork.org/scripts/373832/Robux%20Changer%2020.meta.js
+// ==/UserScript==
+
+function start() {
+    var robuxElement = document.getElementById("nav-robux-amount");
+    var desiredRobuxText = prompt("Enter the desired Robux amount (e.g., 100M+, 50K) or type 'stop' to halt:");
+
+    if (desiredRobuxText === "stop") {
+        console.log("Robux Changer script stopped by user.");
+        return; // Exit the function, stopping the loop
+    }
+
+    if (desiredRobuxText !== null) {
+        robuxElement.innerHTML = desiredRobuxText;
+
+        var balanceElement = document.getElementById("nav-robux-balance");
+        if (balanceElement) {
+            var numericalValue = desiredRobuxText.replace(/,/g, '').replace('M+', '000000').replace('K', '000');
+            if (!isNaN(parseInt(numericalValue))) {
+                balanceElement.innerHTML = parseInt(numericalValue).toLocaleString();
+            } else {
+                balanceElement.innerHTML = "Custom";
+            }
+        }
+    }
+
+    setTimeout(start, 0); // Continue the loop
+}
+
+start();
