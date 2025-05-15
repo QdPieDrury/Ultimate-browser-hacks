@@ -1,0 +1,9 @@
+alert('you have to close these windows after!!');
+let plays = Number(prompt('how many plays do you want to add too your blooket set'));
+let code = Number(prompt('enter the code you want thats using the set when this happends it will add ${plays} tabs to your browser please close them and it will add ${plays} plays too your set'));
+if (plays < 50) {
+let plays = 20;
+}
+for (let i = 0; i < plays; i++) {
+  window.open('https://play.blooket.com/play?id=', code);
+}
