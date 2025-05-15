@@ -1,36 +1,44 @@
+// Set your Game ID here
+const gameId = '';
+
+// Set the variable name for the nickname
+const nicknameVar = 'myNickname';
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-(async () => {
+// You can change "bot" to whatever prefix you'd like
+const bot = 'bot_';
+const nickname = bot + getRandomInt(1, 200000000);
 
-  alert('To run this script install the exstension Puppeteer IDE go into the dev console goto more options that looks like this >> and select pupeteer IDE delete the script inside the file then put this script into it')
-  // Generate a random user nickname
-  let name = prompt('enter bots name')
-  let user = name.ToString() + getRandomInt(1, 200000000);
-  
-  let code = Number(prompt('enter the blooket code'))
-  
-  // Open a new tab and navigate to a URL
-  await page.goto('https://play.blooket.com/play');
+// Puppeteer script to automate joining Blooket
+await page.goto('https://play.blooket.com/play');
 
-  // Enter the Game ID
-  await page.waitForSelector('[placeholder="Game ID"]');
-  await page.click('[placeholder="Game ID"]');
-  await page.waitForSelector('[placeholder="Game ID"]:not([disabled])');
-  await page.type('[placeholder="Game ID"]', code.ToString());
+// Enter the Game ID
+await page.waitForSelector('[placeholder="Game ID"]');
+await page.click('[placeholder="Game ID"]');
+await page.waitForSelector('[placeholder="Game ID"]:not([disabled])');
+await page.type('[placeholder="Game ID"]', gameId);
 
-  // Enter the Nickname
-  await page.waitForSelector('[placeholder="Nickname"]');
-  await page.click('[placeholder="Nickname"]');
-  await page.waitForSelector('[placeholder="Nickname"]:not([disabled])');
-  await page.type('[placeholder="Nickname"]', user);
+  await Promise.all([
+    page.click('[aria-label="Submit"]'),
+    page.waitForNavigation()
+  ]);
 
-  // Join the game
-  await page.waitForSelector('._joinIcon_1lycq_128');
-  await page.click('._joinIcon_1lycq_128');
-  await page.waitForSelector('._joinButton_1lycq_109');
-  await page.click('._joinButton_1lycq_109');
-}
+// Enter the Nickname
+await page.waitForSelector('[placeholder="Nickname"]');
+await page.click('[placeholder="Nickname"]');
+await page.waitForSelector('[placeholder="Nickname"]:not([disabled])');
+await page.type('[placeholder="Nickname"]', nickname);
+
+// Join the game
+await page.waitForSelector('._joinIcon_1lycq_128');
+await page.click('._joinIcon_1lycq_128');
+await page.waitForSelector('._joinButton_1lycq_109');
+await page.click('._joinButton_1lycq_109');
+
+// Log the nickname variable for reference
+console.log(`Nickname variable "${nicknameVar}" set to:`, nickname);
