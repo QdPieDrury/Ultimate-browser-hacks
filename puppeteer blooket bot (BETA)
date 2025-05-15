@@ -9,7 +9,7 @@ function getRandomInt(min, max) {
   alert('To run this script install the exstension Puppeteer IDE go into the dev console goto more options that looks like this >> and select pupeteer IDE delete the script inside the file then put this script into it')
   // Generate a random user nickname
   let name = prompt('enter bots name')
-  let user = name.ToString + getRandomInt(1, 200000000);
+  let user = name.ToString() + getRandomInt(1, 200000000);
   
   let code = Number(prompt('enter the blooket code'))
   
@@ -20,7 +20,7 @@ function getRandomInt(min, max) {
   await page.waitForSelector('[placeholder="Game ID"]');
   await page.click('[placeholder="Game ID"]');
   await page.waitForSelector('[placeholder="Game ID"]:not([disabled])');
-  await page.type('[placeholder="Game ID"]', code.ToString);
+  await page.type('[placeholder="Game ID"]', code.ToString());
 
   // Enter the Nickname
   await page.waitForSelector('[placeholder="Nickname"]');
